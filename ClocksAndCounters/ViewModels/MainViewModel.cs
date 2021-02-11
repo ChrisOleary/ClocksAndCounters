@@ -53,39 +53,70 @@ namespace ClocksAndCounters.ViewModels
             }
         }
 
-      
-        public int Counter
+        private Stopwatch stopWatch = new Stopwatch();
+        private string currentTime = string.Empty;
+  
+        private string counter;
+
+        public string Counter
         {
-            get { return (int)GetValue(CounterProperty); }
-            set { SetValue(CounterProperty, value); }
+            get { return counter; }
+            set 
+            { 
+                counter = value;
+                OnPropertyChanged("Counter");
+            }
         }
+
+        public int ClockArm
+        {
+            get { return (int)GetValue(ClockArmProperty); }
+            set { SetValue(ClockArmProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ClockArm.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ClockArmProperty =
+            DependencyProperty.Register("ClockArm", typeof(int), typeof(MainViewModel), new PropertyMetadata(0));
+
+
 
         public MainViewModel()
         {
+            // start timer
+            DispatcherTimer GameTimer = new DispatcherTimer();
+            GameTimer.Interval = new TimeSpan(0, 0, 0, 0); // sets time to 0
+            stopWatch.Start();
+            GameTimer.Tick += GameTimer_Tick;
+            GameTimer.Start();
+
             DispatcherTimer timer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal,
                  delegate
                  {
                      int newValue = 0;
 
-                     if (Counter == int.MaxValue)
+                     if (ClockArm == int.MaxValue)
                      {
                          newValue = 0;
                      }
                      else
                      {
-                         newValue = Counter + 1;
+                         newValue = ClockArm + 6;
                      }
-                     SetValue(CounterProperty, newValue);
+                    SetValue(ClockArmProperty, newValue);
+                
                  }, Dispatcher);
+            
         }
 
-    
-
-        // Using a DependencyProperty as the backing store for Counter.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty CounterProperty =
-            DependencyProperty.Register("Counter", typeof(int), typeof(MainViewModel), new PropertyMetadata(0));
-
-
+        private void GameTimer_Tick(object sender, EventArgs e)
+        {
+            if (stopWatch.IsRunning)
+            {
+                TimeSpan timeSpan = stopWatch.Elapsed;
+                Counter = String.Format($"{timeSpan.Minutes}, {timeSpan.Seconds}");
+               
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
@@ -93,8 +124,6 @@ namespace ClocksAndCounters.ViewModels
             // this triggers the event property above
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-
 
         
     }

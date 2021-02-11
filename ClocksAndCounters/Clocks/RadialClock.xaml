@@ -11,14 +11,17 @@
             <Border.BorderBrush>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF17100F" Offset="1"/>
-                    <GradientStop Color="#FF7A6461" Offset="0.934"/>
+                    <GradientStop Color="#FF634642" Offset="0.934"/>
                 </RadialGradientBrush>
             </Border.BorderBrush>
             <Border.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF575757" Offset="0"/>
-                    <GradientStop Color="#FFD8D8D8" Offset="0.996"/>
-                </LinearGradientBrush>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FFAEA1A1"/>
+                    <GradientStop Color="#FF999999" Offset="0.212"/>
+                    <GradientStop Color="#FFB27870" Offset="0.951"/>
+                    <GradientStop Color="#FFA46B63" Offset="0.864"/>
+                    <GradientStop Color="#FFAA6E66" Offset="0.792"/>
+                </RadialGradientBrush>
             </Border.Background>
         </Border>
         <Border BorderThickness="5" 
@@ -35,20 +38,25 @@
             <Border.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White" Offset="0"/>
-                    <GradientStop Color="#FF7A6461" Offset="0.509"/>
+                    <GradientStop Color="#FF535353" Offset="0.509"/>
                 </LinearGradientBrush>
             </Border.BorderBrush>
             <Border.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="{Binding Counter}"/>
+                    <RotateTransform Angle="{Binding ClockArm}"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Border.RenderTransform>
         </Border>
         <TextBlock Text="{Binding Counter}" 
                    VerticalAlignment="Center" HorizontalAlignment="Center" 
-                   Margin="0 50 0 0" FontSize="50"></TextBlock>
+                   Margin="0 50 0 0" 
+                   FontSize="50" FontFamily="Impact" Foreground="AntiqueWhite">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="LightGray"></DropShadowEffect>
+            </TextBlock.Effect>
+        </TextBlock>
     </Grid>
 </UserControl>
