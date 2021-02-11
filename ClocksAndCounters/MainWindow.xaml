@@ -3,24 +3,40 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ClocksAndCounters"
+        xmlns:local="clr-namespace:ClocksAndCounters.Clocks"
+        xmlns:local2="clr-namespace:ClocksAndCounters.Gauges"
+        xmlns:local3="clr-namespace:ClocksAndCounters.Buttons"
         mc:Ignorable="d"
-        Title="MainWindow" Background="Black" SizeToContent="WidthAndHeight">
+        Title="MainWindow" Background="Black"  SizeToContent="WidthAndHeight">
     <Window.Resources>
 
     </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0,0" StartPoint="0.1,1">
-                <GradientStop Color="#86C2D9" Offset="0"/>
+                <GradientStop Color="DimGray" Offset="0"/>
                 <GradientStop Color="Black" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <StackPanel Orientation="Horizontal">
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20">
-                <local:GaugeUserControl></local:GaugeUserControl>
-                <local:RadialClock></local:RadialClock>
-            </StackPanel>
-        </StackPanel>
+            <local:RadialClock Grid.Column="1" Grid.Row="1"></local:RadialClock>
+
+        <local2:GaugeUserControl Grid.Column="2" Grid.Row="1"></local2:GaugeUserControl>
+
+        <local:RealisticRadialAnalogeClock Grid.Column="1" Grid.Row="2"></local:RealisticRadialAnalogeClock>
+
+        <local3:RedOnOffButton Grid.Column="2" Grid.Row="2"></local3:RedOnOffButton>
+    
     </Grid>
 </Window>

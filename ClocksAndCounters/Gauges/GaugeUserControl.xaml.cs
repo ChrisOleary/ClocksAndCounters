@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace ClocksAndCounters
+namespace ClocksAndCounters.Gauges
 {
     public partial class GaugeUserControl : UserControl
     {
